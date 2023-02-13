@@ -116,8 +116,6 @@ module.exports.onTransaction = async ({ transaction, chainId }) => {
 
   const jwt = await getJWT();
 
-  console.log('JWT: ', jwt);
-
   const transactionBody = {
     transaction: {
       from: transaction.from,
