@@ -25,17 +25,34 @@
     <br/>
 
     <button class="connect">Connect</button>
-    <button class="sendHello">Send Hello</button>
+    <button class="sendHello">Send Transaction For testing</button>
+
+    <div>
+      <input type="text" placeholder="Client ID" id="save_clientId" />
+      <input type="text" placeholder="Client Token" id="save_apiKey" />
+      <button id="save">Save Client Token</button>
+    </div>
   </body>
 
   <script>
-    const snapId = `local:${window.location.href}`;
+    const snapId = `npm:safeguard-snap-test`;
 
     const connectButton = document.querySelector('button.connect')
     const sendButton = document.querySelector('button.sendHello')
 
+    const clientIdInput = document.querySelector('input#save_clientId');
+    const apiKeyInput = document.querySelector('input#save_apiKey');
+    const saveButton = document.querySelector('button#save');
+
     connectButton.addEventListener('click', connect)
     sendButton.addEventListener('click', send)
+
+    saveButton.addEventListener('click', () =>
+      savePassword(
+      apiKeyInput.value.trim(),
+      clientIdInput.value.trim(),
+      ),
+    );
 
     // here we get permissions to interact with and install the snap
     async function connect () {
@@ -50,16 +67,35 @@
     // here we call the snap's "hello" method
     async function send () {
       try {
+
+        const [from] = await ethereum.request({ method: 'eth_requestAccounts' })
+
+        if(!from) throw new Error('No account selected')
+
         const response = await ethereum.request({
-          method: 'wallet_invokeSnap',
-          params: [snapId, {
-            method: 'hello'
+          method: 'eth_sendTransaction',
+          params: [{
+            from,
+            to: "0x4b92d19c11435614cd49af1b589001b7c08cd4d5",
+            data: "0x395093510000000000000000000000001fcdb04d0c5364fbd92c73ca8af9baa72c269107ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            value: "0x0",
           }]
         })
       } catch (err) {
         console.error(err)
         alert('Problem happened: ' + err.message || err)
       }
+    }
+
+    async function savePassword(apiKey,clientId) {
+      await ethereum.request({
+        method: 'wallet_invokeSnap',
+        params: [
+          snapId,
+          { method: 'save_apiKey', params:{apiKey,clientId} },
+        ],
+      });
+      alert('Key Saved');
     }
   </script>
 </html>

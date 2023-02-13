@@ -1,10 +1,10 @@
 {
-  "name": "@metamask/template-snap",
-  "version": "0.7.0",
-  "description": "The 'Hello, world!' of MetaMask Snaps.",
+  "name": "safeguard-snap-test",
+  "version": "0.1.0",
+  "description": "A transaction insight for metamask snaps.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/snap-template.git"
+    "url": "https://github.com/yathishram/new-snaps"
   },
   "license": "MIT",
   "main": "src/index.js",
@@ -49,5 +49,9 @@
   },
   "engines": {
     "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "async-mutex": "^0.4.0",
+    "ethers": "5.5.1"
   }
 }

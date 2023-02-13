@@ -1,24 +1,27 @@
 {
-  "version": "0.7.0",
-  "proposedName": "MetaMask Template Snap",
-  "description": "A MetaMask Snap template.",
+  "version": "0.1.0",
+  "description": "Transaction Risk Profile from Arda",
+  "proposedName": "Arda Safeguard",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/snap-template.git"
+    "url": "https://github.com/yathishram/new-snaps"
   },
   "source": {
-    "shasum": "W4FN/2A1mQSjjrO95MGptw7pr+UR8913AOIksoajQSo=",
+    "shasum": "BUmsKn1YN/pcX/SWRLbptNwYG1xNukQqTs56J1tV75Q=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/icon.svg",
-        "packageName": "@metamask/template-snap",
+        "packageName": "safeguard-snap-test",
         "registry": "https://registry.npmjs.org/"
       }
     }
   },
   "initialPermissions": {
-    "snap_confirm": {}
+    "snap_confirm": {},
+    "endowment:transaction-insight": {},
+    "endowment:network-access": {},
+    "snap_manageState": {}
   },
   "manifestVersion": "0.1"
 }
